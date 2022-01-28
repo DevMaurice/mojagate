@@ -17,5 +17,11 @@ return [
      * Set Moja gate basic authentication password.
      * 
      */
-    'password' => env('MOJAGATE_PASSWORD')
+    'password' => env('MOJAGATE_PASSWORD'),
+
+    /**
+     * Set moja gate API url 
+     * 
+     */
+    'webhook' => env('MOJAGATE_WEBHOOK')
 ];
