@@ -19,7 +19,7 @@ class SendSmsController extends Controller
         
         $result = Moja::send('254714692255','Message test','12345test');
 
-        
+        dd($result);
 
         //save data
     }

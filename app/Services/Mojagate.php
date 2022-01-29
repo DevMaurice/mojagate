@@ -3,7 +3,6 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
 
 class Mojagate  implements SmsSender
 {
@@ -55,11 +54,7 @@ class Mojagate  implements SmsSender
      */
     public function send($phone, $message, $uuid)
     {
-       if(is_null($this->token())){
-           $this->authenticate();
-       }
-
-       $headers = [
+        $headers = [
             'Authorization' => 'Bearer '.$this->token(),
             'Accept' => 'application/json',
        ];
@@ -73,7 +68,7 @@ class Mojagate  implements SmsSender
         
         ];
         
-        return  Http::withHeader($headers)->post($this->url.'/sendsms',['json' => $data])->json();
+        return  Http::withHeaders($headers)->post($this->url.'/sendsms',$data)->json();
     }
     /**
      * Get the current saved token.
@@ -82,12 +77,6 @@ class Mojagate  implements SmsSender
      */
     public function token()
     {
-        if(Cache::get('token')){
-            
-            return $this->token(); 
-        }
-        $this->authenticate();
-
-        return Cache::get('token');              
+       return Cache::get('token');              
     }
 }
