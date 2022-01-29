@@ -35,12 +35,9 @@ class ProcessSmsDeliveryQueue implements ShouldQueue
      */
     public function handle()
     {
-         Log::info('On queueueueueueueu');
-        Log::info($this->request);
-        dd();
         $message = Message::where('tracking_code',$this->request['message_id'])->first();
 
-        $message->delivered_at = Carbon::parse();
+        $message->delivered_at = Carbon::parse($this->request['delivered_at']);
 
         $message->update();
     }
