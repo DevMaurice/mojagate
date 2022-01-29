@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [SendSmsController::class,'send']);
+Route::post('/webhook', [SendSmsController::class,'delivery']);
